@@ -1,0 +1,17 @@
+applications:
+- name: eventhub-test
+  instances: 1
+  memory: 128M
+  no-route: true
+  buildpack: https://github.com/cloudfoundry/buildpack-nodejs.git
+  command: node index.js
+  services:
+  - eventhub
+  env:
+    EVENT_HUB_SERVICE_NAME: eventhub
+    UAA_URL: https://<YOUR UAA URL>/oauth/token
+    UAA_CLIENT_ID: <YOUR UAA CLIENT>
+    UAA_CLIENT_SECRET: <YOUR UAA SECRET>
+    GRPC_VERBOSITY: DEBUG
+    DEBUG: '*'
+  stack: cflinuxfs2

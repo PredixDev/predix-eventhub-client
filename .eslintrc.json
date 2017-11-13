@@ -1,0 +1,36 @@
+{
+  "extends": "standard",
+  "env": {
+    "es6": true,
+    "node": true,
+    "mocha": true
+  },
+  "plugins":[
+  ],
+  "rules": {
+    "array-bracket-spacing": [2, "never"],
+    "camelcase": [0, { "properties": "always" }],
+    "computed-property-spacing": [2, "never"],
+    "generator-star-spacing": [2, { "before": false, "after": true }],
+    "indent": [2, 2, { "SwitchCase": 1 }],
+    "max-len": [2, 150, 4, { "ignoreUrls": true, "ignorePattern": "\t*.*\\(\\'\\.?\/\\w.*\\'\\).*"}],
+    "no-duplicate-imports": 2,
+    "no-whitespace-before-property": 2,
+    "object-curly-spacing": [2, "always"],
+    "prefer-arrow-callback": 2,
+    "prefer-rest-params": 2,
+    "quote-props": [2, "as-needed", { "keywords": true }],
+    "semi": [2, "always"],
+    "space-before-function-paren": [2, { "anonymous": "always", "named": "never" }],
+    "template-curly-spacing": [2, "never"],
+    "yield-star-spacing": [2, { "before": false, "after": true }],
+    "require-jsdoc": ["error", {
+      "require": {
+        "FunctionDeclaration": true,
+        "MethodDefinition": true,
+        "ClassDeclaration": true
+      }
+    }],
+    "valid-jsdoc": [2, {"requireParamDescription": false, "requireReturn": false}]
+  }
+}
