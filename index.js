@@ -266,6 +266,7 @@ class Subscriber {
       this.uaaUrl = options.uaaUrl;
       this.clientId = options.clientId;
       this.clientSecret = options.clientSecret;
+      this.offsetNewest = options.offsetNewest || false;
     } else {
       throw new Error('Required options missing, see debug log');
     }
@@ -277,6 +278,9 @@ class Subscriber {
    */
   get stream() {
     // Create a new subscription and return the raw stream
+    const metadata = new grpc.Metadata();
+    metadata.add('offset-newest', this.offsetNewest.toString());
+
     const creds = getCreds(this.uaaUrl, this.clientId, this.clientSecret, this.zoneIdProp, this.zoneId);
     const client = new eventhub_proto.Subscriber(this.uri, creds);
 
@@ -286,7 +290,7 @@ class Subscriber {
       zone_id: this.zoneId,
       subscriber: this.name,
       instance_id: this.instance
-    });
+    }, metadata);
 
     s.on('close', () => {
       debug('Subscribe stream closed');
