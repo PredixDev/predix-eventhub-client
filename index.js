@@ -219,6 +219,11 @@ class Publisher {
       this.postStream = this.stream;
     }
 
+    // Ensure the body is a string
+    if (typeof eventBody !== 'string') {
+      eventBody = JSON.stringify(eventBody);
+    }
+
     // Ensure all tag values are strings
     const sTags = Object.keys(tags || {}).reduce((o, k) => {
       o[k] = '' + tags[k];
@@ -229,7 +234,7 @@ class Publisher {
       messages: {
         msg: [{
           id: uuidv4(),
-          body: Buffer.from(JSON.stringify(eventBody), 'utf-8'),
+          body: Buffer.from(eventBody, 'utf-8'),
           zone_id: this.zoneId,
           tags: sTags,
           timestamp: {
